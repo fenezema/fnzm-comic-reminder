@@ -1,0 +1,48 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type User {
+    id: String!
+    name: String!
+    personalToken: String!
+}
+
+type UserComic {
+    id: String!
+    title: String!
+    listUrl: String!
+    latestChapter: Int!
+    latestChapterUrl: String!
+    lastReadChapter: Int
+    lastReadChapterUrl: String
+    isLatestChapterOpened: Boolean!
+}
+
+type UpdateLastReadChapterInput {
+    chapter: Int!
+    url: String!
+}
+
+input AddNewComicInput {
+    userID: String!
+    title: String!
+    listUrl: String!
+}
+
+input UpdateUserComicLastReadInput {
+    userID: String!
+    comicID: String!
+    chapter: Int!
+    url: String!
+}
+
+type Query {
+    getSubscribedComic(userID: String!): [UserComic] 
+}
+
+type Mutation {
+    addNewComic(input: AddNewComicInput): UserComic
+    updateUserComicLastRead(input: UpdateUserComicLastReadInput): UserComic
+}
